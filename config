@@ -120,7 +120,9 @@ bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
 # floating default windows
 for_window [class="^.*"] border pixel 1
 
-# i3-gapps
+# i3-gaps
+gaps inner 3
+gaps outer 3
 
 # Screenshots
 bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date)"
@@ -216,4 +218,4 @@ bindsym $mod+r mode "resize"
 
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
-exec_always feh --bg-fill $HOME/Downloads/itl.cat_jjba-wallpaper_426348.jpg
+exec_always feh --bg-fill $HOME/Pictures/minimal-landscape-wallpaper-1366x768-wallpaper.jpg
