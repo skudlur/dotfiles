@@ -27,10 +27,11 @@
 (unless package-archive-contents
   (package-refresh-contents))
 
-  ;; Initialize use-package on non-Linux platforms
+;; Initialize use-package on non-Linux platforms
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
 
+;; ensures the packages are installed
 (require 'use-package)
 (setq use-package-always-ensure t)
 
@@ -67,7 +68,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(doom-themes magit nerd-fonts doom-modeline use-package counsel)))
+   '(py-autopep8 elpy python-mode doom-themes magit nerd-fonts doom-modeline use-package counsel)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -93,3 +94,20 @@
   (doom-themes-treemacs-config)
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
+
+;; Python
+
+(use-package python-mode)
+
+(use-package elpy
+  :after python-mode
+
+  :custom
+  (elpy-rpc-python-command "python3")
+
+  :config
+  (elpy-enable))
+
+(use-package py-autopep8
+  :after python-mode
+  :hook (elpy-mode-hook . py-autopep8-enable-on-save))
