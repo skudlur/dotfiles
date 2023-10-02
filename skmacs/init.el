@@ -8,13 +8,13 @@
 (menu-bar-mode -1)	;; Disable the menu bar
 
 ;; Visual bell
-(setq visible-bell t)
+;; (setq visible-bell t)
 
 ;; Font
 ;; (set-face-attribute 'default nil :font "SourceCodePro-Medium" :height 100)
 
 ;; Theme
-(load-theme 'tango-dark)
+;; (load-theme 'tango-dark)
 
 ;; Initialize package sources
 (require 'package)
@@ -66,10 +66,30 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(magit nerd-fonts doom-modeline use-package counsel)))
+ '(package-selected-packages
+   '(doom-themes magit nerd-fonts doom-modeline use-package counsel)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;; Doom themes
+(use-package doom-themes
+  :ensure t
+  :config
+  ;; Global settings (defaults)
+  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  (load-theme 'doom-wilmersdorf t)
+
+  ;; Enable flashing mode-line on errors
+  (doom-themes-visual-bell-config)
+  ;; Enable custom neotree theme (all-the-icons must be installed!)
+  (doom-themes-neotree-config)
+  ;; or for treemacs users
+  (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
+  (doom-themes-treemacs-config)
+  ;; Corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config))
