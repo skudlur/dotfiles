@@ -39,18 +39,17 @@
 
 (use-package ivy
   :diminish
-  :bind (("C-s" . swiper))
   :config
   (ivy-mode 1))
 
-;; Counsel
+;; Helm
 
-(use-package counsel
-  :bind (("C-M-j" . 'counsel-switch-buffer))
-  :custom
-  (counsel-linux-app-format-function #'counsel-linux-app-format-function-name-only)
+(use-package helm
+  :diminish
+  :bind (("M-x" . 'helm-M-x)
+	 ("C-s" . 'swiper-helm))
   :config
-  (counsel-mode 1))
+  (helm-mode 1))
 
 ;; nerd fonts and icons
 
@@ -68,15 +67,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(py-autopep8 elpy python-mode doom-themes magit nerd-fonts doom-modeline use-package counsel)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+   '(elscreen winum nyan-mode pdf-tools dirvish highlight-parentheses multiple-cursors el-get evil-surround vterm swiper-helm helm py-autopep8 elpy python-mode doom-themes magit nerd-fonts doom-modeline use-package counsel)))
 
 ;; Doom themes
+
 (use-package doom-themes
   :ensure t
   :config
@@ -99,15 +93,37 @@
 
 (use-package python-mode)
 
-(use-package elpy
-  :after python-mode
+;; Vterm
 
-  :custom
-  (elpy-rpc-python-command "python3")
+(use-package vterm
+    :ensure t)
 
-  :config
-  (elpy-enable))
+;; multiple cursors
 
-(use-package py-autopep8
-  :after python-mode
-  :hook (elpy-mode-hook . py-autopep8-enable-on-save))
+(require 'multiple-cursors)
+(global-set-key (kbd "C-c C-m") 'mc/edit-lines)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
+;; highlight parentheses
+
+(use-package highlight-parentheses
+  :ensure t)
+
+;; Dirvish
+
+(use-package dirvish)
+(dirvish-override-dired-mode)
+
+;; pdf-tools
+
+(use-package pdf-tools)
+
+;; nyan mode
+
+(use-package nyan-mode)
+(nyan-mode 1)
+
+;; elscreen
+(elscreen-start)
